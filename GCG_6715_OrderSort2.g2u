@@ -1,0 +1,43 @@
+﻿Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+
+V.Local.userid.Declare(String)
+V.Local.sort1.Declare(String)
+
+'Mod by AA 4/25/22 for Nordic Hotubs.
+'Now it saves last user in Order sort 2
+
+'Check if new?
+'f.Intrinsic.Control.If(v.Caller.Switches, <>, "N")
+'	f.Intrinsic.Control.End
+'f.Intrinsic.Control.EndIf
+'if sales order
+F.Intrinsic.Control.If(V.Caller.Hook,=,"11560")
+	V.Local.sort1.Set(V.Passed.000073)
+	V.Passed.000116.Set("Created By")
+	F.Intrinsic.Control.If(V.Local.sort1,=,"")
+		'set the order sort field to the userid
+		V.Passed.000073.Set(V.Caller.User)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+
+'if quote
+F.Intrinsic.Control.If(V.Caller.Hook,=,"10710")
+	V.Local.sort1.Set(V.Passed.000073)
+	V.Passed.000142.Set("Created By")
+	F.Intrinsic.Control.If(V.Local.sort1,=,"")
+		'set the order sort field to the userid
+		V.Passed.000073.Set(V.Caller.User)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+
+Program.Sub.main.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$aanazco$}$20220425105350590$}$7aQAV3Tor/tR9bkuakHbuzQlHVuXCGOz5x4kUt/VE2TF7iSMJz9iHC/UwRZWhImbi47Nj+nPgOs=
+Program.Sub.Comments.End
